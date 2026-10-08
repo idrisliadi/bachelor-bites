@@ -1,0 +1,89 @@
+<%- include("../partials/header", {
+  title: "Create account"
+}) %>
+
+<div class="auth-container">
+
+  <div class="auth-card">
+
+    <div class="auth-icon">
+      🍳
+    </div>
+
+    <h1>
+      Join Bachelor Bites
+    </h1>
+
+    <p>
+      Never wonder what to eat again.
+    </p>
+
+    <% if (error) { %>
+
+      <div class="error">
+        <%= error %>
+      </div>
+
+    <% } %>
+
+    <form
+      action="/auth/register"
+      method="POST"
+    >
+
+      <label>
+        Name
+      </label>
+
+      <input
+        type="text"
+        name="name"
+        placeholder="Your name"
+        required
+      >
+
+      <label>
+        Email
+      </label>
+
+      <input
+        type="email"
+        name="email"
+        placeholder="you@example.com"
+        required
+      >
+
+      <label>
+        Password
+      </label>
+
+      <input
+        type="password"
+        name="password"
+        placeholder="At least 6 characters"
+        minlength="6"
+        required
+      >
+
+      <button
+        type="submit"
+        class="button primary full"
+      >
+        Create account
+      </button>
+
+    </form>
+
+    <p class="auth-bottom">
+      Already have an account?
+
+      <a href="/auth/login">
+        Login
+      </a>
+    </p>
+
+  </div>
+
+</div>
+
+<%- include("../partials/footer") %>

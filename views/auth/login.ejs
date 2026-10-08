@@ -1,0 +1,77 @@
+<%- include("../partials/header", {
+  title: "Login"
+}) %>
+
+<div class="auth-container">
+
+  <div class="auth-card">
+
+    <div class="auth-icon">
+      🍳
+    </div>
+
+    <h1>
+      Welcome back
+    </h1>
+
+    <p>
+      Let's figure out what you're eating.
+    </p>
+
+    <% if (error) { %>
+
+      <div class="error">
+        <%= error %>
+      </div>
+
+    <% } %>
+
+    <form
+      action="/auth/login"
+      method="POST"
+    >
+
+      <label>
+        Email
+      </label>
+
+      <input
+        type="email"
+        name="email"
+        placeholder="you@example.com"
+        required
+      >
+
+      <label>
+        Password
+      </label>
+
+      <input
+        type="password"
+        name="password"
+        placeholder="••••••••"
+        required
+      >
+
+      <button
+        type="submit"
+        class="button primary full"
+      >
+        Login
+      </button>
+
+    </form>
+
+    <p class="auth-bottom">
+      Don't have an account?
+
+      <a href="/auth/register">
+        Create one
+      </a>
+    </p>
+
+  </div>
+
+</div>
+
+<%- include("../partials/footer") %>

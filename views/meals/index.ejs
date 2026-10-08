@@ -1,0 +1,106 @@
+<%- include("../partials/header", {
+  title: "Meals"
+}) %>
+
+<section class="section">
+
+  <span class="badge">
+    Explore
+  </span>
+
+  <h1>
+    Find something to eat
+  </h1>
+
+  <p class="subtitle">
+    Search meals by name, time or budget.
+  </p>
+
+  <form
+    action="/meals"
+    method="GET"
+    class="filters"
+  >
+
+    <input
+      type="text"
+      name="search"
+      placeholder="Search meals..."
+      value="<%= search || '' %>"
+    >
+
+    <select name="category">
+
+      <option value="">
+        Any meal
+      </option>
+
+      <option
+        value="breakfast"
+        <%= category === "breakfast" ? "selected" : "" %>
+      >
+        Breakfast
+      </option>
+
+      <option
+        value="lunch"
+        <%= category === "lunch" ? "selected" : "" %>
+      >
+        Lunch
+      </option>
+
+      <option
+        value="dinner"
+        <%= category === "dinner" ? "selected" : "" %>
+      >
+        Dinner
+      </option>
+
+    </select>
+
+    <input
+      type="number"
+      name="maxTime"
+      placeholder="Max minutes"
+      value="<%= maxTime || '' %>"
+    >
+
+    <input
+      type="number"
+      name="maxBudget"
+      placeholder="Max budget ₦"
+      value="<%= maxBudget || '' %>"
+    >
+
+    <button
+      class="button primary"
+      type="submit"
+    >
+      Search
+    </button>
+
+  </form>
+
+  <div class="meal-grid">
+
+    <% if (meals.length === 0) { %>
+
+      <div class="empty">
+        No meals found 😔
+      </div>
+
+    <% } %>
+
+    <% meals.forEach(meal => { %>
+
+      <%- include("../partials/meal-card", {
+        meal
+      }) %>
+
+    <% }) %>
+
+  </div>
+
+</section>
+
+<%- include("../partials/footer") %>

@@ -1,0 +1,84 @@
+<%- include("../partials/header", {
+  title: "What can I cook?"
+}) %>
+
+<section class="section">
+
+  <span class="badge">
+    Kitchen mode 🧑‍🍳
+  </span>
+
+  <h1>
+    What can I cook?
+  </h1>
+
+  <p class="subtitle">
+    Tell us what's in your kitchen.
+  </p>
+
+  <form
+    action="/meals/cook"
+    method="POST"
+    class="cook-form"
+  >
+
+    <input
+      type="text"
+      name="ingredients"
+      value="<%= ingredients %>"
+      placeholder="rice, egg, tomato, onion..."
+      required
+    >
+
+    <button
+      class="button primary"
+      type="submit"
+    >
+      Find food
+    </button>
+
+  </form>
+
+  <% if (results) { %>
+
+    <h2 class="results-heading">
+      Here's what you can make:
+    </h2>
+
+    <% if (!results.length) { %>
+
+      <div class="empty">
+        Nothing matched your ingredients 😔
+      </div>
+
+    <% } %>
+
+    <div class="meal-grid">
+
+      <% results.forEach(result => { %>
+
+        <div>
+
+          <%- include("../partials/meal-card", {
+            meal: result.meal
+          }) %>
+
+          <div class="match">
+            You have
+            <strong>
+              <%= result.matches %>
+            </strong>
+            matching ingredients.
+          </div>
+
+        </div>
+
+      <% }) %>
+
+    </div>
+
+  <% } %>
+
+</section>
+
+<%- include("../partials/footer") %>

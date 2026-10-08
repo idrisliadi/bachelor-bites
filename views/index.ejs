@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="/css/style.css">
+  <title>Bachelor Bites</title>
+</head>
+
+<body>
+
+  <%- include("partials/header", {
+    title: "Bachelor Bites"
+  }) %>
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <span class="badge">
+        🍽️ Stop thinking about food
+      </span>
+
+      <h1>
+        What should
+        <span>I eat?</span>
+      </h1>
+
+      <p>
+        You're hungry.
+        You don't want to think.
+        Let Bachelor Bites decide.
+      </p>
+
+      <% if (user) { %>
+
+        <a
+          href="/meals/recommend"
+          class="button primary"
+        >
+          🤔 Tell me what to eat
+        </a>
+
+      <% } else { %>
+
+        <a
+          href="/auth/register"
+          class="button primary"
+        >
+          Get started
+        </a>
+
+      <% } %>
+
+    </div>
+
+  </section>
+
+  <section class="features">
+
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        🤔
+      </div>
+
+      <h3>
+        What should I eat?
+      </h3>
+
+      <p>
+        Tell us your budget,
+        time and mood.
+        We'll choose for you.
+      </p>
+
+      <a href="/meals/recommend">
+        Try it →
+      </a>
+
+    </div>
+
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        🧑‍🍳
+      </div>
+
+      <h3>
+        What can I cook?
+      </h3>
+
+      <p>
+        Enter the ingredients
+        sitting in your kitchen.
+      </p>
+
+      <a href="/meals/cook">
+        Try it →
+      </a>
+
+    </div>
+
+    <div class="feature-card">
+
+      <div class="feature-icon">
+        💰
+      </div>
+
+      <h3>
+        I'm broke
+      </h3>
+
+      <p>
+        Find meals that fit
+        your budget.
+      </p>
+
+      <a href="/meals?maxBudget=1500">
+        Find cheap meals →
+      </a>
+
+    </div>
+
+  </section>
+
+  <section class="section">
+
+    <div class="section-heading">
+
+      <div>
+        <span class="badge">
+          Popular
+        </span>
+
+        <h2>
+          What people are eating
+        </h2>
+      </div>
+
+      <a href="/meals">
+        See all →
+      </a>
+
+    </div>
+
+    <div class="meal-grid">
+
+      <% popularMeals.forEach(meal => { %>
+
+        <%- include("partials/meal-card", {
+          meal
+        }) %>
+
+      <% }) %>
+
+    </div>
+
+  </section>
+
+  <%- include("partials/footer") %>
+
+</body>
+</html>

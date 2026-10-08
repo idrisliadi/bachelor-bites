@@ -1,0 +1,48 @@
+<div class="meal-card">
+
+  <div class="meal-emoji">
+    🍲
+  </div>
+
+  <div class="meal-card-body">
+
+    <span class="category">
+      <%= meal.category %>
+    </span>
+
+    <h3>
+      <%= meal.name %>
+    </h3>
+
+    <p>
+      <%= meal.description %>
+    </p>
+
+    <div class="meal-info">
+
+      <span>
+        ⏱
+        <%= meal.prepTime + meal.cookTime %>
+        min
+      </span>
+
+      <span>
+        💰 ₦<%= meal.cost.toLocaleString() %>
+      </span>
+
+      <span>
+        ⭐ <%= meal.rating %>
+      </span>
+
+    </div>
+
+    <a
+      href="/meals/<%= meal._id %>"
+      class="button secondary"
+    >
+      View meal
+    </a>
+
+  </div>
+
+</div>

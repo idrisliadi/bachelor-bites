@@ -1,0 +1,244 @@
+<%- include("../partials/header", {
+  title: "What should I eat?"
+}) %>
+
+<section class="recommend-page">
+
+  <% if (!meal) { %>
+
+    <div class="recommend-intro">
+
+      <span class="big-emoji">
+        🤔
+      </span>
+
+      <h1>
+        What should I eat?
+      </h1>
+
+      <p>
+        Answer three simple questions.
+        We'll make the decision for you.
+      </p>
+
+    </div>
+
+  <% } %>
+
+  <% if (error) { %>
+
+    <div class="error">
+      <%= error %>
+    </div>
+
+  <% } %>
+
+  <% if (!meal) { %>
+
+    <form
+      action="/meals/recommend"
+      method="POST"
+      class="recommend-form"
+    >
+
+      <div class="form-group">
+
+        <label>
+          What's your mood?
+        </label>
+
+        <div class="choice-grid">
+
+          <label class="choice">
+
+            <input
+              type="radio"
+              name="mood"
+              value="quick"
+              checked
+            >
+
+            <span>
+              ⚡
+              <strong>Quick</strong>
+              <small>
+                I want food now
+              </small>
+            </span>
+
+          </label>
+
+          <label class="choice">
+
+            <input
+              type="radio"
+              name="mood"
+              value="cheap"
+            >
+
+            <span>
+              💰
+              <strong>Cheap</strong>
+              <small>
+                Save my money
+              </small>
+            </span>
+
+          </label>
+
+          <label class="choice">
+
+            <input
+              type="radio"
+              name="mood"
+              value="comfort"
+            >
+
+            <span>
+              ❤️
+              <strong>Comfort</strong>
+              <small>
+                I need something good
+              </small>
+            </span>
+
+          </label>
+
+        </div>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          How much do you want to spend?
+        </label>
+
+        <input
+          type="number"
+          name="budget"
+          value="3000"
+          placeholder="₦3,000"
+          required
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>
+          How much time do you have?
+        </label>
+
+        <select name="maxTime">
+
+          <option value="15">
+            15 minutes
+          </option>
+
+          <option value="30" selected>
+            30 minutes
+          </option>
+
+          <option value="60">
+            1 hour
+          </option>
+
+          <option value="120">
+            I have plenty of time
+          </option>
+
+        </select>
+
+      </div>
+
+      <button
+        class="button primary full"
+        type="submit"
+      >
+        ✨ Decide for me
+      </button>
+
+    </form>
+
+  <% } %>
+
+  <% if (meal) { %>
+
+    <div class="result">
+
+      <span class="badge">
+        Your food has been decided 🎉
+      </span>
+
+      <h1>
+        You should eat...
+      </h1>
+
+      <div class="result-card">
+
+        <div class="result-emoji">
+          🍲
+        </div>
+
+        <div>
+
+          <span class="category">
+            <%= meal.category %>
+          </span>
+
+          <h2>
+            <%= meal.name %>
+          </h2>
+
+          <p>
+            <%= meal.description %>
+          </p>
+
+          <div class="meal-info">
+
+            <span>
+              ⏱
+              <%= meal.prepTime + meal.cookTime %>
+              min
+            </span>
+
+            <span>
+              💰 ₦<%= meal.cost.toLocaleString() %>
+            </span>
+
+            <span>
+              ⭐ <%= meal.rating %>
+            </span>
+
+          </div>
+
+          <div class="result-buttons">
+
+            <a
+              href="/meals/<%= meal._id %>"
+              class="button primary"
+            >
+              View recipe
+            </a>
+
+            <a
+              href="/meals/recommend"
+              class="button secondary"
+            >
+              🔄 Pick again
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  <% } %>
+
+</section>
+
+<%- include("../partials/footer") %>

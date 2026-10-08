@@ -1,0 +1,153 @@
+<%- include("../partials/header", {
+  title: meal.name
+}) %>
+
+<section class="meal-detail">
+
+  <div class="detail-image">
+    🍲
+  </div>
+
+  <div class="detail-content">
+
+    <span class="category">
+      <%= meal.category %>
+    </span>
+
+    <h1>
+      <%= meal.name %>
+    </h1>
+
+    <p class="detail-description">
+      <%= meal.description %>
+    </p>
+
+    <div class="detail-stats">
+
+      <div>
+        <strong>
+          <%= meal.prepTime + meal.cookTime %>
+        </strong>
+
+        <span>
+          Minutes
+        </span>
+      </div>
+
+      <div>
+        <strong>
+          ₦<%= meal.cost.toLocaleString() %>
+        </strong>
+
+        <span>
+          Estimated cost
+        </span>
+      </div>
+
+      <div>
+        <strong>
+          <%= meal.difficulty %>
+        </strong>
+
+        <span>
+          Difficulty
+        </span>
+      </div>
+
+      <div>
+        <strong>
+          ⭐ <%= meal.rating %>
+        </strong>
+
+        <span>
+          Rating
+        </span>
+      </div>
+
+    </div>
+
+    <% if (user) { %>
+
+      <form
+        action="/meals/<%= meal._id %>/favorite"
+        method="POST"
+      >
+
+        <button
+          class="button secondary"
+          type="submit"
+        >
+          ❤️ Save meal
+        </button>
+
+      </form>
+
+    <% } %>
+
+  </div>
+
+</section>
+
+<section class="recipe-section">
+
+  <div class="ingredients">
+
+    <h2>
+      Ingredients
+    </h2>
+
+    <ul>
+
+      <% meal.ingredients.forEach(
+        ingredient => {
+      %>
+
+        <li>
+          <span>
+            <%= ingredient.name %>
+          </span>
+
+          <strong>
+            <%= ingredient.quantity %>
+          </strong>
+        </li>
+
+      <% }) %>
+
+    </ul>
+
+  </div>
+
+  <div class="instructions">
+
+    <h2>
+      How to make it
+    </h2>
+
+    <ol>
+
+      <% meal.instructions.forEach(
+        (instruction, index) => {
+      %>
+
+        <li>
+
+          <div class="step-number">
+            <%= index + 1 %>
+          </div>
+
+          <p>
+            <%= instruction %>
+          </p>
+
+        </li>
+
+      <% }) %>
+
+    </ol>
+
+  </div>
+
+</section>
+
+<%- include("../partials/footer") %>
